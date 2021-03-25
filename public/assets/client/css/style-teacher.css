@@ -1,0 +1,29 @@
+.container{
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.input-field{
+    padding: 10px 0;
+}
+
+.input-field label{
+    display: block;
+    font-size: 20px;
+    font-weight: 300;
+    color: gray;
+}
+
+.input-field input[type='text']{
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+}
+
+.publish-btn{
+    width: 100%;
+    padding: 10px;
+    background-color: teal;
+    color: white;
+    text-transform: uppercase;
+}

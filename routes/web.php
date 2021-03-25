@@ -12,5 +12,17 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('client.welcome');
+});
+
+Route::get('/homepage', function () {
+    return view('client.homepage');
+});
+
+Route::get('/teacher', function () {
+    return view('client.teacher');
+});
+
+Route::get('/admin', function () {
+    return view('admin.admin');
 });

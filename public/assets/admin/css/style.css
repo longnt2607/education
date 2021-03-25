@@ -1,0 +1,7 @@
+.info{
+    display: flex!important;
+}
+.info i{
+    margin: 5px 10px 0px 0px;
+    color: #fff;
+}
