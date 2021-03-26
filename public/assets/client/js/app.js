@@ -15,6 +15,7 @@ function check(src) {
   var y = document.querySelector('.form-teacher');
   if(src.value == "teacher"){
     y.style.display = "block";
+    y.style.zIndex = "2";
     x.style.display = "none";
   }
   else{
