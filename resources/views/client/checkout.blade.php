@@ -82,23 +82,27 @@
                 <div class="input-field">
                     <i class="fas fa-user"></i>
                     <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="email" autofocus placeholder="Tên đăng nhập">
-                    @error('username')
+
+                </div>
+                @error('username')
+                <div>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror
                 </div>
-
+                @enderror
                 <div class="input-field">
                     <i class="fas fa-lock"></i>
                     <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Mật khẩu">
-                    @error('password')
+
+                </div>
+                <!-- @error('password')
+                <div>
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
                     </span>
-                    @enderror
                 </div>
-
+                @enderror -->
                 <div class="forgot-field">
                     <i class="fas fa-unlock"></i>
                     <a href="#">Quên mật khẩu</a>
@@ -143,13 +147,14 @@
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
                         <input id="register_student_email" placeholder="Email" type="email" class="form-control @error('register_student_email') is-invalid @enderror" name="register_student_email" value="{{ old('register_student_email') }}" required autocomplete="register_student_email">
-
-                        @error('register_student_email')
+                    </div>
+                    @error('email')
+                    <div>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
                     </div>
+                    @enderror
                     <div class="input-field">
                         <i class="fas fa-phone"></i>
                         <input id="register_student_phone" placeholder="Số điện thoại" type="text" class="form-control @error('register_student_phone') is-invalid @enderror" name="register_student_phone" value="{{ old('register_student_phone') }}" required autocomplete="register_student_phone" autofocus>
@@ -173,15 +178,17 @@
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
                         <input id="register_student_password" placeholder="Mật khẩu" type="password" class="form-control @error('register_student_password') is-invalid @enderror" name="register_student_password" required autocomplete="register_student_password">
-                        @error('register_student_password')
+                    </div>
+                    @error('password')
+                    <div>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
                     </div>
+                    @enderror
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input id="register_student_password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control" name="register_student_password_confirmation" required autocomplete="register_student_password">
+                        <input id="register_student_password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control" name="register_student_password_confirmation" required autocomplete="register_student_password_confirmation">
                     </div>
                     <input type="hidden" id="register_student_role" name="role" value="2">
                     <input name="btnStudentRegister" type="submit" class="btn btn-student-register" value="Đăng ký" />
@@ -223,13 +230,14 @@
                     <div class="input-field">
                         <i class="fas fa-envelope"></i>
                         <input id="register_teacher_email" placeholder="Email" type="email" class="form-control @error('register_teacher_email') is-invalid @enderror" name="register_teacher_email" value="{{ old('register_teacher_email') }}" required autocomplete="register_teacher_email">
-
-                        @error('register_teacher_email')
+                    </div>
+                    @error('email')
+                    <div>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
                     </div>
+                    @enderror
                     <div class="input-field">
                         <i class="fas fa-phone"></i>
                         <input id="register_teacher_phone" placeholder="Số điện thoại" type="text" class="form-control @error('register_teacher_phone') is-invalid @enderror" name="register_teacher_phone" value="{{ old('register_teacher_phone') }}" required autocomplete="register_teacher_phone" autofocus>
@@ -251,16 +259,18 @@
                     </div>
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input id="register_teacher_password" placeholder="Mật khẩu" type="password" class="form-control @error('register_teacher_password') is-invalid @enderror" name="register_teacher_password" required autocomplete="register_teacher_new-password">
-                        @error('register_teacher_password')
+                        <input id="register_teacher_password" placeholder="Mật khẩu" type="password" class="form-control @error('register_teacher_password') is-invalid @enderror" name="register_teacher_password" required autocomplete="register_teacher_password">
+                    </div>
+                    @error('password')
+                    <div>
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
-                        @enderror
                     </div>
+                    @enderror
                     <div class="input-field">
                         <i class="fas fa-lock"></i>
-                        <input id="register_teacher_password-confirm" placeholder="Nhập lại mật khẩu" type="password" class="form-control" name="register_teacher_password_confirmation" required autocomplete="register_teacher_new-password">
+                        <input id="register_teacher_password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control" name="register_teacher_password_confirmation" required autocomplete="register_teacher_password_confirmation">
                     </div>
                     <input type="hidden" id="register_teacher_role" name="role" value="1">
                     <input name="btnTeacherRegister" type="submit" class="btn btn-teacher-register" value="Đăng ký" />

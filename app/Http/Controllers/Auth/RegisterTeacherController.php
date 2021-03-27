@@ -48,18 +48,20 @@ class RegisterTeacherController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    // protected function validator(array $data)
-    // {
-    //     return Validator::make($data, [
-    //         'name' => ['required'],
-    //         'username' => ['required'],
-    //         'email' => ['required'],
-    //         'phone' => ['required'],
-    //         'personClass' => ['required'],
-    //         'password' => ['required'],
-    //         'role' => ['required'],
-    //     ]);
-    // }
+    protected function validator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => ['required', 'string'],
+            'username' => ['required', 'string'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'phone' => ['required'],
+            'class' => ['required', 'string'],
+            // 'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8', 'required_with:password_confirmation', 'same:password_confirmation'],
+            'password_confirmation' => ['required', 'min:8'],
+            // 'role' => ['required'],
+        ]);
+    }
 
     /**
      * Create a new user instance after a valid registration.
@@ -84,6 +86,21 @@ class RegisterTeacherController extends Controller
     public function register_teacher(Request $request)
     {
         $input = $request->all();
+
+        $data = [
+                'name' => $input['register_teacher_name'],
+                'username' => $input['register_teacher_username'],
+                'email' => $input['register_teacher_email'],
+                'phone' => $input['register_teacher_phone'],
+                'class' => $input['register_teacher_class'],
+                'password' => $input['register_teacher_password'],
+                'password_confirmation' => $input['register_teacher_password_confirmation'],
+            ];
+        $validator = $this->validator($data);
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
         User::create([
             'name' => $input['register_teacher_name'],
             'username' => $input['register_teacher_username'],
@@ -96,34 +113,4 @@ class RegisterTeacherController extends Controller
         ]);
         return redirect('/checkout');
     }
-
-    // public function register(Request $request)
-    // {
-    //     $input = $request->all();
-    //     // User::create([
-    //     //     'name' => $input['name'],
-    //     //     'username' => $input['username'],
-    //     //     'email' => $input['email'],
-    //     //     'phone' => $input['phone'],
-    //     //     'class' => $input['personClass'],
-    //     //     'password' => Hash::make($input['password']),
-    //     //     'role' => $input['role'],
-    //     // ]);
-
-    //     $user = new User();
-    //     $user->name = $input['name'];
-    //     $user->username = $input['username'];
-    //     $user->email = $input['email'];
-    //     $user->phone = $input['phone'];
-    //     $user->class = $input['class'];
-    //     $user->password = $input['password'];
-    //     $user->role = $input['role'];
-    //     $user->save();
-
-    //     return response()->json([
-    //         'result' => true,
-    //         'message' => 'Create account successful',
-    //         // 'input' => $input,
-    //     ]);
-    // }
 }

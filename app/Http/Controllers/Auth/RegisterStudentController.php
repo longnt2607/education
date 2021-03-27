@@ -53,10 +53,12 @@ class RegisterStudentController extends Controller
         return Validator::make($data, [
             'name' => ['required', 'string'],
             'username' => ['required', 'string'],
-            'email' => ['required', 'email', 'max:255', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'phone' => ['required'],
             'class' => ['required', 'string'],
-            'password' => ['required', 'min:8', 'confirmed'],
+            // 'password' => ['required', 'min:8', 'confirmed'],
+            'password' => ['required', 'min:8', 'required_with:password_confirmation', 'same:password_confirmation'],
+            'password_confirmation' => ['required', 'min:8'],
             // 'role' => ['required'],
         ]);
     }
@@ -85,16 +87,6 @@ class RegisterStudentController extends Controller
     {
         $input = $request->all();
 
-        // $validatedData = $request->validate([
-        //     'name' => 'required|max:100|min:8',
-        //     'username' => 'required|max:100|min:8',
-        //     'email' => 'required|email',
-        //     'phone' => 'required|',
-        //     'class' => 'required|',
-        //     'password' => 'required|max:100',
-        //     'cf_password' => 'required|max:100',
-        // ]);
-
         $data = [
             'name' => $input['register_student_name'],
             'username' => $input['register_student_username'],
@@ -102,8 +94,9 @@ class RegisterStudentController extends Controller
             'phone' => $input['register_student_phone'],
             'class' => $input['register_student_class'],
             'password' => $input['register_student_password'],
+            'password_confirmation' => $input['register_student_password_confirmation'],
         ];
-        $validator = validator($data);
+        $validator = $this->validator($data);
         if ($validator->fails()) {
             return back()->withErrors($validator)->withInput();
         }
@@ -120,48 +113,4 @@ class RegisterStudentController extends Controller
         ]);
         return redirect('/checkout');
     }
-
-    // public function register_teacher(array $data)
-    // {
-    //     return User::create([
-    //         'name' => $data['register_teacher_name'],
-    //         'username' => $data['register_teacher_username'],
-    //         'email' => $data['register_teacher_email'],
-    //         'phone' => $data['register_teacher_phone'],
-    //         'class' => $data['register_teacher_class'],
-    //         'password' => Hash::make($data['register_teacher_password']),
-    //         // 'role' => $data['Studentrole'],
-    //         'role' => '1',
-    //     ]);
-    // }
-
-    // public function register(Request $request)
-    // {
-    //     $input = $request->all();
-    //     // User::create([
-    //     //     'name' => $input['name'],
-    //     //     'username' => $input['username'],
-    //     //     'email' => $input['email'],
-    //     //     'phone' => $input['phone'],
-    //     //     'class' => $input['personClass'],
-    //     //     'password' => Hash::make($input['password']),
-    //     //     'role' => $input['role'],
-    //     // ]);
-
-    //     $user = new User();
-    //     $user->name = $input['name'];
-    //     $user->username = $input['username'];
-    //     $user->email = $input['email'];
-    //     $user->phone = $input['phone'];
-    //     $user->class = $input['class'];
-    //     $user->password = $input['password'];
-    //     $user->role = $input['role'];
-    //     $user->save();
-
-    //     return response()->json([
-    //         'result' => true,
-    //         'message' => 'Create account successful',
-    //         // 'input' => $input,
-    //     ]);
-    // }
 }
